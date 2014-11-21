@@ -1,2 +1,4 @@
 GUIConnectFour
 ==============
+Jake
+Daniel
