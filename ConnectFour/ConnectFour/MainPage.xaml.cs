@@ -37,7 +37,7 @@ namespace ConnectFour
         public int firstPlayerScore = 0;
         public int secondPlayerScore = 0;
         public string[] topPlayers = { "One", "Two", "Three", "Four", "Five" };
-        public int[] topPlayerScores = { 5,4,3,2,1 };
+        public int[] topPlayerScores = { 0, 0, 0, 0, 0 };
         public int[,] grid = { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } };
         //public int[,] grid = { { 0, 1, 2, 0, 1, 2 }, { 1, 0, 2, 2, 1, 0 }, { 2, 2, 1, 0, 0, 1 }, { 0, 1, 0, 2, 1, 2 }, { 0, 2, 2, 1, 0, 0 }, { 0, 2, 1, 2, 1, 0 }, { 1, 1, 2, 2, 0, 1 } };
         public MainPage()

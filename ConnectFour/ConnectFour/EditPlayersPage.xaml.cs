@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -57,15 +58,13 @@ namespace ConnectFour
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
 
-            firstPlayerNameTextBlock.Text = firstPlayerName;
+            textBox1.Text = firstPlayerName;
             //firstPlayerScoreTextBlock.Text = firstPlayerColor.ToString();
             ellipse1.Fill = new SolidColorBrush(firstPlayerColor);
 
-            secondPlayerNameTextBlock.Text = secondPlayerName;
+            textBox2.Text = secondPlayerName;
             //secondPlayerScoreTextBlock.Text = secondPlayerColor.ToString();
             ellipse2.Fill = new SolidColorBrush(secondPlayerColor);
-
-            
         }
 
         /// <summary>
@@ -132,6 +131,90 @@ namespace ConnectFour
                 colorPanel2.Visibility = Windows.UI.Xaml.Visibility.Visible;
             else
                 colorPanel2.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+        }
+
+        private void Ellipse_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse1.Fill = ellipse.Fill;
+            firstPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
+        }
+
+        private void Ellipse_PointerPressed_1(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse1.Fill = ellipse.Fill;
+            firstPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
+        }
+
+        private void Ellipse_PointerPressed_2(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse1.Fill = ellipse.Fill;
+            firstPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
+        }
+
+        private void Ellipse_PointerPressed_3(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse1.Fill = ellipse.Fill;
+            firstPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
+        }
+
+        private void Ellipse_PointerPressed_4(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse1.Fill = ellipse.Fill;
+            firstPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
+        }
+
+        private void Ellipse_PointerPressed_5(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse1.Fill = ellipse.Fill;
+            firstPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
+        }
+
+        private void Ellipse_PointerPressed_6(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse2.Fill = ellipse.Fill;
+            secondPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
+        }
+
+        private void Ellipse_PointerPressed_7(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse2.Fill = ellipse.Fill;
+            secondPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
+        }
+
+        private void Ellipse_PointerPressed_8(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse2.Fill = ellipse.Fill;
+            secondPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
+        }
+
+        private void Ellipse_PointerPressed_9(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse2.Fill = ellipse.Fill;
+            secondPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
+        }
+
+        private void Ellipse_PointerPressed_10(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse2.Fill = ellipse.Fill;
+            secondPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
+        }
+
+        private void Ellipse_PointerPressed_11(object sender, PointerRoutedEventArgs e)
+        {
+            Ellipse ellipse = sender as Ellipse;
+            ellipse2.Fill = ellipse.Fill;
+            secondPlayerColor = ((SolidColorBrush)ellipse.Fill).Color;
         }
     }
 }

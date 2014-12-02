@@ -77,11 +77,11 @@ namespace ConnectFour
             topScorerTextBlock5.Text = topPlayers[4] + ":";
             topScoreTextBlock5.Text = "  " + topPlayerScores[4].ToString();
 
-            firstPlayerNameTextBlock.Text = firstPlayerName + " Wins:  ";
-            firstPlayerScoreTextBlock.Text = firstPlayerScore.ToString();
+            name1.Text = firstPlayerName + " Wins:  ";
+            score1.Text = firstPlayerScore.ToString();
 
-            secondPlayerNameTextBlock.Text = secondPlayerName + " Wins:  ";
-            secondPlayerScoreTextBlock.Text = secondPlayerScore.ToString();
+            name2.Text = secondPlayerName + " Wins:  ";
+            score2.Text = secondPlayerScore.ToString();
         }
 
         /// <summary>
@@ -133,5 +133,22 @@ namespace ConnectFour
         }
 
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            firstPlayerScore = 0;
+            secondPlayerScore = 0;
+
+            score1.Text = "0";
+            score2.Text = "0";
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            for(int i = 0; i < 5; i++)
+            {
+                topPlayerScores[i] = 0;
+            }
+        }
     }
 }

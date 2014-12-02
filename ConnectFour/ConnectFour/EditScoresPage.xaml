@@ -46,13 +46,24 @@
             <TextBlock x:Name="pageTitle" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" FontFamily="Kristen ITC" Text="Connect Four"/>
         </Grid>
-        <TextBlock x:Name="firstPlayerNameTextBlock" HorizontalAlignment="Left" Margin="46,466,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Kristen ITC" FontSize="36"/>
-        <TextBlock x:Name="secondPlayerNameTextBlock" HorizontalAlignment="Left" Margin="46,545,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Kristen ITC" FontSize="36"/>
-        <!--<Button Content="New Game" HorizontalAlignment="Left" Margin="43,333,0,0" VerticalAlignment="Top" Height="75" Width="304" FontFamily="Kristen ITC" FontSize="36" RenderTransformOrigin="0.5,0.5" Click="Button_Click"/>-->
-        <TextBlock x:Name="secondPlayerScoreTextBlock" TextWrapping="Wrap" FontSize="36" FontFamily="Kristen ITC" Margin="365,545,979,174"/>
-        <TextBlock x:Name="firstPlayerScoreTextBlock" TextWrapping="Wrap" FontFamily="Kristen ITC" FontSize="36" Margin="365,466,979,253"/>
-        <StackPanel HorizontalAlignment="Right" Height="340"  Orientation="Vertical" Margin="0,175,44,253" Width="300">
-            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="Top Scorers" VerticalAlignment="Top" FontFamily="Kristen ITC" FontSize="48" Height="100"/>
+
+        <Button Content="Clear Player Scores" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Bottom" Click="Button_Click" Margin="107,0,0,265"/>
+        <Button Content="Clear High Scores" HorizontalAlignment="Right"  Grid.Row="1" VerticalAlignment="Bottom" Margin="0,0,41,265" Click="Button_Click_1"/>
+        
+        <StackPanel HorizontalAlignment="Left" Height="60" Margin="110,161,0,0" Grid.Row="1" VerticalAlignment="Top" Width="709" Orientation="Horizontal">
+            <TextBlock x:Name="name1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" FontFamily="Kristen ITC" FontSize="36"/>
+            <TextBlock x:Name="score1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" FontFamily="Kristen ITC" FontSize="36" Margin="30,0,0,0"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Left" Height="60" Margin="110,246,0,0" Grid.Row="1" VerticalAlignment="Top" Width="709" Orientation="Horizontal">
+            <TextBlock x:Name="name2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" FontFamily="Kristen ITC" FontSize="36"/>
+            <TextBlock x:Name="score2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" FontFamily="Kristen ITC" FontSize="36" Margin="30,0,0,0"/>
+        </StackPanel>
+
+        <!--<StackPanel HorizontalAlignment="Right" Height="340"  Orientation="Vertical" Margin="0,175,44,253" Width="300">-->
+
+        <StackPanel HorizontalAlignment="Right" Height="340" Margin="0,175,44,253" Width="300" Orientation="Vertical">
+            <!--<TextBlock />-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock x:Name="topScorerTextBlock1" FontFamily="Kristen ITC" FontSize="24" Height="50"/>
                 <TextBlock x:Name="topScoreTextBlock1" FontFamily="Kristen ITC" FontSize="24" Height="50"/>
@@ -74,5 +85,6 @@
                 <TextBlock x:Name="topScoreTextBlock5" FontFamily="Kristen ITC" FontSize="24" Height="50" HorizontalAlignment="Right"/>
             </StackPanel>
         </StackPanel>
+        <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="Top Scorers" VerticalAlignment="Top" FontFamily="Kristen ITC" FontSize="48" Height="100"/>
     </Grid>
 </Page>

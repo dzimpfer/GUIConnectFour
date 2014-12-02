@@ -46,31 +46,32 @@
             <TextBlock x:Name="pageTitle" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" Text="Connect Four" FontFamily="Kristen ITC"/>
         </Grid>
-        <TextBlock x:Name="firstPlayerNameTextBlock" HorizontalAlignment="Left" Margin="46,466,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Kristen ITC" FontSize="36"/>
-        <TextBlock x:Name="secondPlayerNameTextBlock" HorizontalAlignment="Left" Margin="46,545,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Kristen ITC" FontSize="36" Text="radfasdfsdf"/>
 
-        <!--<Button Content="New Game" HorizontalAlignment="Left" Margin="43,333,0,0" VerticalAlignment="Top" Height="75" Width="304" FontFamily="Kristen ITC" FontSize="36" RenderTransformOrigin="0.5,0.5" Click="Button_Click"/>-->
-        <!--<TextBlock x:Name="secondPlayerScoreTextBlock" TextWrapping="Wrap" FontSize="36" FontFamily="Kristen ITC" Margin="365,545,979,174"/>
-        <TextBlock x:Name="firstPlayerScoreTextBlock" TextWrapping="Wrap" FontFamily="Kristen ITC" FontSize="36" Margin="365,466,979,253"/>-->
-        <Ellipse x:Name="ellipse1" HorizontalAlignment="Left" Height="45" Margin="552,330,0,0" Grid.Row="1" VerticalAlignment="Top" Width="46" PointerPressed="ellipse1_PointerPressed"/>
-        <Ellipse x:Name="ellipse2" HorizontalAlignment="Left" Height="45" Margin="552,405,0,0" Grid.Row="1" VerticalAlignment="Top" Width="46" PointerPressed="ellipse2_PointerPressed"/>
-        
-        <StackPanel x:Name="colorPanel2"  Height="45" Margin="641,350,180,178" Grid.Row="1"  Width="545" Orientation="Horizontal">
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
+        <StackPanel x:Name="stackPanel1" HorizontalAlignment="Left" Height="45" Margin="147,211,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1209" Orientation="Horizontal">
+            <TextBlock x:Name="firstPlayerNameTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" FontFamily="Kristen ITC" FontSize="36" Text="First Player:"/>
+            <TextBox x:Name="textBox1" Margin="30,0,30,0" Foreground="White" Background="Transparent" FontFamily="Kristen ITC" FontSize="24"/>
+            <Ellipse x:Name="ellipse1" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="46" PointerPressed="ellipse1_PointerPressed" Margin="30,0,30,0"/>
+            <StackPanel x:Name="colorPanel1"  Height="45"  Width="331" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed">
+                <Ellipse Fill="Red" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed"/>
+                <Ellipse Fill="Yellow" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_1"/>
+                <Ellipse Fill="Lime" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_2"/>
+                <Ellipse Fill="Cyan" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_3"/>
+                <Ellipse Fill="Blue" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_4"/>
+                <Ellipse Fill="Magenta" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_5"/>
+            </StackPanel>
         </StackPanel>
-
-        <StackPanel x:Name="colorPanel1"  Height="45" Margin="641,261,180,322" Grid.Row="1"  Width="545" Orientation="Horizontal">
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
-            <Ellipse Fill="#FFD80707" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
+        <StackPanel x:Name="stackPanel2" HorizontalAlignment="Left" Height="45" Margin="147,305,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1209" Orientation="Horizontal">
+            <TextBlock x:Name="secondPlayerNameTextBlock"  TextWrapping="Wrap"  FontFamily="Kristen ITC" FontSize="36" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Second Player:  "/>
+            <TextBox x:Name="textBox2" Margin="30,0,30,0" Foreground="White" Background="Transparent" FontFamily="Kristen ITC" FontSize="24"/>
+            <Ellipse x:Name="ellipse2" HorizontalAlignment="Left" Height="45"  Width="46" PointerPressed="ellipse2_PointerPressed" Margin="30,0,30,0"/>
+            <StackPanel x:Name="colorPanel2"  Height="45"   Width="324" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed">
+                <Ellipse Fill="Red" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_6"/>
+                <Ellipse Fill="Yellow" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_7"/>
+                <Ellipse Fill="Lime" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_8"/>
+                <Ellipse Fill="Cyan" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_9"/>
+                <Ellipse Fill="Blue" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_10"/>
+                <Ellipse Fill="Magenta" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_11"/>
+            </StackPanel>
         </StackPanel>
 
     </Grid>
