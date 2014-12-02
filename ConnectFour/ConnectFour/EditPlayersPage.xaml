@@ -74,5 +74,20 @@
             </StackPanel>
         </StackPanel>
 
+        <StackPanel HorizontalAlignment="Left" Height="46" Margin="147,378,0,0" Grid.Row="1" VerticalAlignment="Top" Width="193">
+            <TextBlock x:Name="computer"  TextWrapping="Wrap"  FontFamily="Kristen ITC" FontSize="36" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Computer: "/>
+            <TextBox x:Name="computertext" Margin="439,384,0,0" Foreground="White" Background="Transparent" FontFamily="Kristen ITC" FontSize="24"/>
+            <Ellipse x:Name="ellipse3" HorizontalAlignment="Left" Height="45"  Width="46" PointerPressed="ellipse2_PointerPressed" Margin="30,0,30,0"/>
+            <StackPanel x:Name="colorPanel3"  Height="45"   Width="324" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed">
+                <Ellipse Fill="Red" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_6"/>
+                <Ellipse Fill="Yellow" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_7"/>
+                <Ellipse Fill="Lime" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_8"/>
+                <Ellipse Fill="Cyan" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_9"/>
+                <Ellipse Fill="Blue" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_10"/>
+                <Ellipse Fill="Magenta" Height="45" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" PointerPressed="Ellipse_PointerPressed_11"/>
+            </StackPanel>
+        </StackPanel>
+        
+
     </Grid>
 </Page>
