@@ -40,6 +40,7 @@
             </StackPanel>
         </StackPanel>
         <TextBlock x:Name="interactionTextBlock" TextAlignment="Center" HorizontalAlignment="Center"  TextWrapping="Wrap" Text="Test Text" VerticalAlignment="Bottom" Margin="437,0,436,132" FontFamily="Kristen ITC" FontSize="36" Width="493"/>
+        <TextBlock x:Name="garbage" HorizontalAlignment="Left" Margin="85,100,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
     </Grid>
 
     <Page.BottomAppBar>

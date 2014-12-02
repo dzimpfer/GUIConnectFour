@@ -199,44 +199,51 @@ namespace ConnectFour
         }
         private void makePlay(int column)
         {
-            interactionTextBlock.Text = column.ToString();
-
-            if (grid[0, column] != 0)
+            if (!gameIsOver(grid))
             {
-                interactionTextBlock.Foreground = new SolidColorBrush(Colors.Red);
-                interactionTextBlock.Text = "Invalid Move";
-            }
-            else
-            {
-                for (int r = BOARD_HEIGHT - 1; r > -1; r--)
-                {
-                    if (grid[r, column] == 0)
-                    {
-                        if (firstPlayerTurn)
-                        {
-                            grid[r, column] = 1;
+                interactionTextBlock.Text = column.ToString();
 
-                        }
-                        if (!firstPlayerTurn)
-                        {
-                            grid[r, column] = 2;
-
-                        }
-                        break;
-                    }
-                }
-                firstPlayerTurn = !firstPlayerTurn;
-                DrawGrid();
-                if(firstPlayerTurn)
+                if (grid[0, column] != 0)
                 {
-                    interactionTextBlock.Foreground = new SolidColorBrush(firstPlayerColor);
-                    interactionTextBlock.Text = firstPlayerName + "'s Turn!";
+                    interactionTextBlock.Foreground = new SolidColorBrush(Colors.Red);
+                    interactionTextBlock.Text = "Invalid Move";
                 }
                 else
                 {
-                    interactionTextBlock.Foreground = new SolidColorBrush(secondPlayerColor);
-                    interactionTextBlock.Text = secondPlayerName + "'s Turn!";
+                    for (int r = BOARD_HEIGHT - 1; r > -1; r--)
+                    {
+                        if (grid[r, column] == 0)
+                        {
+                            if (firstPlayerTurn)
+                            {
+                                grid[r, column] = 1;
+
+                            }
+                            if (!firstPlayerTurn)
+                            {
+                                grid[r, column] = 2;
+
+                            }
+                            break;
+                        }
+                    }
+                    firstPlayerTurn = !firstPlayerTurn;
+                    DrawGrid();
+                    if (firstPlayerTurn)
+                    {
+                        interactionTextBlock.Foreground = new SolidColorBrush(firstPlayerColor);
+                        interactionTextBlock.Text = firstPlayerName + "'s Turn!";
+                    }
+                    else
+                    {
+                        interactionTextBlock.Foreground = new SolidColorBrush(secondPlayerColor);
+                        interactionTextBlock.Text = secondPlayerName + "'s Turn!";
+                    }
                 }
+                if (firstPlayerTurn)
+                    garbage.Text = evaluateFor1(grid).ToString();
+                else
+                    garbage.Text = evaluateFor2(grid).ToString();
             }
         }
 
@@ -267,5 +274,224 @@ namespace ConnectFour
         {
             this.Frame.Navigate(typeof(EditPlayersPage), null);
         }
+
+        private bool gameIsOver(int[,] grid)
+        {
+            bool result = false;
+
+            if (playerWon(grid, 1))
+                result = true;
+            if (playerWon(grid, 2))
+                result = true;
+            
+            return result;
+        }
+
+        private bool playerWon(int[,] grid, int player)
+        {
+            bool result = false;
+
+            for (int r = 0; r < BOARD_HEIGHT; r++)
+            {
+                for (int c = 0; c < BOARD_WIDTH; c++)
+                {
+                    if(r <= BOARD_HEIGHT - 4)
+                    {
+                        if(grid[r,c] == player && grid[r+1,c] == player && grid[r+2,c] == player && grid[r+3,c] == player)
+                            result = true;
+                    }
+                    if(c <= BOARD_WIDTH - 4)
+                    {
+                        if(grid[r,c] == player && grid[r,c + 1] == player && grid[r,c + 2] == player && grid[r,c + 3] == player)
+                            result = true;
+                    }
+                    if (c <= BOARD_WIDTH - 4 && r <= BOARD_HEIGHT - 4)
+                    {
+                        if (grid[r, c] == player && grid[r + 1, c + 1] == player && grid[r + 2, c + 2] == player && grid[r + 3, c + 3] == player)
+                            result = true;
+                    }
+                    if (c <= BOARD_WIDTH - 4 && r > 2)
+                    {
+                        if (grid[r, c] == player && grid[r - 1, c + 1] == player && grid[r - 2, c + 2] == player && grid[r - 3, c + 3] == player)
+                            result = true;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private int evaluateFor1(int[,] grid)
+        {
+            int result = 0;
+
+            if (playerWon(grid, 1))
+                result = 1000;
+            if (playerWon(grid, 2))
+                result = -1000;
+
+
+            if (!gameIsOver(grid))
+            {
+                for (int r = 0; r < BOARD_HEIGHT; r++)
+                {
+                    for (int c = 0; c < BOARD_WIDTH; c++)
+                    {
+                        if (r <= BOARD_HEIGHT - 3)
+                        {
+                            if (grid[r, c] == 1 && grid[r + 1, c] == 1 && grid[r + 2, c] == 1)
+                                result += 3;
+                            if (grid[r, c] == 2 && grid[r + 1, c] == 2 && grid[r + 2, c] == 2)
+                                result -= 3;
+                        }
+                        if (c <= BOARD_WIDTH - 3)
+                        {
+                            if (grid[r, c] == 1 && grid[r, c + 1] == 1 && grid[r, c + 2] == 1)
+                                result += 3;
+                            if (grid[r, c] == 2 && grid[r, c + 1] == 2 && grid[r, c + 2] == 2)
+                                result -= 3;
+                        }
+                        if (c <= BOARD_WIDTH - 3 && r <= BOARD_HEIGHT - 3)
+                        {
+                            if (grid[r, c] == 1 && grid[r + 1, c + 1] == 1 && grid[r + 2, c + 2] == 1)
+                                result += 3;
+                            if (grid[r, c] == 2 && grid[r + 1, c + 1] == 2 && grid[r + 2, c + 2] == 2)
+                                result -= 3;
+                        }
+                        if (c <= BOARD_WIDTH - 3 && r > 1)
+                        {
+                            if (grid[r, c] == 1 && grid[r - 1, c + 1] == 1 && grid[r - 2, c + 2] == 1)
+                                result += 3;
+                            if (grid[r, c] == 2 && grid[r - 1, c + 1] == 2 && grid[r - 2, c + 2] == 2)
+                                result -= 3;
+                        }
+                    }
+                }
+
+                for (int r = 0; r < BOARD_HEIGHT; r++)
+                {
+                    for (int c = 0; c < BOARD_WIDTH; c++)
+                    {
+                        if (r <= BOARD_HEIGHT - 2)
+                        {
+                            if (grid[r, c] == 1 && grid[r + 1, c] == 1)
+                                result += 2;
+                            if (grid[r, c] == 2 && grid[r + 1, c] == 2)
+                                result -= 2;
+                        }
+                        if (c <= BOARD_WIDTH - 2)
+                        {
+                            if (grid[r, c] == 1 && grid[r, c + 1] == 1)
+                                result += 2;
+                            if (grid[r, c] == 2 && grid[r, c + 1] == 2)
+                                result -= 2;
+                        }
+                        if (c <= BOARD_WIDTH - 2 && r <= BOARD_HEIGHT - 2)
+                        {
+                            if (grid[r, c] == 1 && grid[r + 1, c + 1] == 1)
+                                result += 2;
+                            if (grid[r, c] == 2 && grid[r + 1, c + 1] == 2)
+                                result -= 2;
+                        }
+                        if (c <= BOARD_WIDTH - 2 && r > 0)
+                        {
+                            if (grid[r, c] == 1 && grid[r - 1, c + 1] == 1)
+                                result += 2;
+                            if (grid[r, c] == 2 && grid[r - 1, c + 1] == 2)
+                                result += 2;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private int evaluateFor2(int[,] grid)
+        {
+            int result = 0;
+
+            if (playerWon(grid, 2))
+                result = 1000;
+            if (playerWon(grid, 2))
+                result = -1000;
+
+            if (!gameIsOver(grid))
+            {
+                for (int r = 0; r < BOARD_HEIGHT; r++)
+                {
+                    for (int c = 0; c < BOARD_WIDTH; c++)
+                    {
+                        if (r <= BOARD_HEIGHT - 3)
+                        {
+                            if (grid[r, c] == 2 && grid[r + 1, c] == 2 && grid[r + 2, c] == 2)
+                                result += 3;
+                            if (grid[r, c] == 1 && grid[r + 1, c] == 1 && grid[r + 2, c] == 1)
+                                result -= 3;
+                        }
+                        if (c <= BOARD_WIDTH - 3)
+                        {
+                            if (grid[r, c] == 2 && grid[r, c + 1] == 2 && grid[r, c + 2] == 2)
+                                result += 3;
+                            if (grid[r, c] == 1 && grid[r, c + 1] == 1 && grid[r, c + 2] == 1)
+                                result -= 3;
+                        }
+                        if (c <= BOARD_WIDTH - 3 && r <= BOARD_HEIGHT - 3)
+                        {
+                            if (grid[r, c] == 2 && grid[r + 1, c + 1] == 2 && grid[r + 2, c + 2] == 2)
+                                result += 3;
+                            if (grid[r, c] == 1 && grid[r + 1, c + 1] == 1 && grid[r + 2, c + 2] == 1)
+                                result -= 3;
+                        }
+                        if (c <= BOARD_WIDTH - 3 && r > 1)
+                        {
+                            if (grid[r, c] == 2 && grid[r - 1, c + 1] == 2 && grid[r - 2, c + 2] == 2)
+                                result += 3;
+                            if (grid[r, c] == 1 && grid[r - 1, c + 1] == 1 && grid[r - 2, c + 2] == 1)
+                                result += 3;
+                        }
+                    }
+                }
+
+            
+                for (int r = 0; r < BOARD_HEIGHT; r++)
+                {
+                    for (int c = 0; c < BOARD_WIDTH; c++)
+                    {
+                        if (r <= BOARD_HEIGHT - 2)
+                        {
+                            if (grid[r, c] == 2 && grid[r + 1, c] == 2)
+                                result += 2;
+                            if (grid[r, c] == 1 && grid[r + 1, c] == 1)
+                                result -= 2;
+                        }
+                        if (c <= BOARD_WIDTH - 2)
+                        {
+                            if (grid[r, c] == 2 && grid[r, c + 1] == 2)
+                                result += 2;
+                            if (grid[r, c] == 1 && grid[r, c + 1] == 1)
+                                result -= 2;
+                        }
+                        if (c <= BOARD_WIDTH - 2 && r <= BOARD_HEIGHT - 2)
+                        {
+                            if (grid[r, c] == 2 && grid[r + 1, c + 1] == 2)
+                                result += 2;
+                            if (grid[r, c] == 1 && grid[r + 1, c + 1] == 1)
+                                result -= 2;
+                        }
+                        if (c <= BOARD_WIDTH - 2 && r > 0)
+                        {
+                            if (grid[r, c] == 2 && grid[r - 1, c + 1] == 2)
+                                result += 2;
+                            if (grid[r, c] == 1 && grid[r - 1, c + 1] == 1)
+                                result -= 2;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
     }
 }
