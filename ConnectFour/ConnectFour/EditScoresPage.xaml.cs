@@ -226,6 +226,12 @@ Windows.Storage.ApplicationData.Current.RoamingSettings;
 
             score1.Text = "0";
             score2.Text = "0";
+
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+Windows.Storage.ApplicationData.Current.RoamingSettings;
+
+            roamingSettings.Values["firstPlayerTurn"] = "true";
+            roamingSettings.Values["grid"] = "000000000000000000000000000000000000000000";
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

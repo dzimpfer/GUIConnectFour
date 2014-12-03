@@ -121,6 +121,9 @@ namespace ConnectFour
             {
                 roamingSettings.Values["firstPlayerScore"] = 0;
                 roamingSettings.Values["secondPlayerScore"] = 0;
+
+                roamingSettings.Values["firstPlayerTurn"] = "true";
+                roamingSettings.Values["grid"] = "000000000000000000000000000000000000000000";
             }
 
             roamingSettings.Values["firstPlayerName"] = textBox1.Text.Trim() == "" ? firstPlayerName : textBox1.Text.Trim();

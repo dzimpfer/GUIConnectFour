@@ -53,115 +53,6 @@ namespace ConnectFour
             get { return this.navigationHelper; }
         }
 
-        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-            // Load session and app state
-            Windows.Storage.ApplicationDataContainer roamingSettings =
-        Windows.Storage.ApplicationData.Current.RoamingSettings;
-            if (roamingSettings.Values.ContainsKey("firstPlayerName"))
-                firstPlayerName = roamingSettings.Values["firstPlayerName"].ToString();
-
-            if (roamingSettings.Values.ContainsKey("secondPlayerName"))
-                secondPlayerName = roamingSettings.Values["secondPlayerName"].ToString();
-
-            if (roamingSettings.Values.ContainsKey("firstPlayerScore"))
-                firstPlayerScore = Convert.ToInt32(roamingSettings.Values["firstPlayerScore"].ToString());
-
-            if (roamingSettings.Values.ContainsKey("secondPlayerScore"))
-                secondPlayerScore = Convert.ToInt32(roamingSettings.Values["secondPlayerScore"].ToString());
-
-            firstPlayerNameTextBlock.Text = firstPlayerName + ":  ";
-            firstPlayerScoreTextBlock.Text = firstPlayerScore.ToString();
-
-            secondPlayerNameTextBlock.Text = secondPlayerName + ":  ";
-            secondPlayerScoreTextBlock.Text = secondPlayerScore.ToString();
-
-            if (roamingSettings.Values.ContainsKey("grid"))
-                grid = deserializeGrid(roamingSettings.Values["grid"].ToString());
-
-            if (roamingSettings.Values.ContainsKey("firstPlayerTurn"))
-                firstPlayerTurn = Convert.ToBoolean(roamingSettings.Values["firstPlayerTurn"].ToString());
-
-            if (roamingSettings.Values.ContainsKey("topPlayers"))
-                topPlayers = deserializePlayers(roamingSettings.Values["topPlayers"].ToString());
-
-            if (roamingSettings.Values.ContainsKey("topPlayerScores"))
-                topPlayerScores = deserializeScores(roamingSettings.Values["topPlayerScores"].ToString());
-
-            populateTopPlayers();
-
-            if (roamingSettings.Values.ContainsKey("firstPlayerColor"))
-                firstPlayerColor = GetColorFromHexString(roamingSettings.Values["firstPlayerColor"].ToString());
-
-            if (roamingSettings.Values.ContainsKey("secondPlayerColor"))
-                secondPlayerColor = GetColorFromHexString(roamingSettings.Values["secondPlayerColor"].ToString());
-
-            if (firstPlayerTurn)
-            {
-                interactionTextBlock.Foreground = new SolidColorBrush(firstPlayerColor);
-                interactionTextBlock.Text = firstPlayerName + "'s Turn!";
-            }
-            else
-            {
-                interactionTextBlock.Foreground = new SolidColorBrush(secondPlayerColor);
-                interactionTextBlock.Text = secondPlayerName + "'s Turn!";
-            }
-            if (playerWon(grid, 1))
-            {
-                interactionTextBlock.Foreground = new SolidColorBrush(firstPlayerColor);
-                interactionTextBlock.Text = firstPlayerName + " Won!";
-            }
-            if (playerWon(grid, 2))
-            {
-                interactionTextBlock.Foreground = new SolidColorBrush(secondPlayerColor);
-                interactionTextBlock.Text = secondPlayerName + " Won!";
-            }
-
-            DrawGrid();
-        }
-
-        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-             // Save session and app state
-            Windows.Storage.ApplicationDataContainer roamingSettings =
-        Windows.Storage.ApplicationData.Current.RoamingSettings;
-            roamingSettings.Values["firstPlayerName"] = firstPlayerName;
-
-            roamingSettings.Values["secondPlayerName"] = secondPlayerName;
-
-            roamingSettings.Values["firstPlayerScore"] = firstPlayerScore.ToString();
-
-            roamingSettings.Values["secondPlayerScore"] = secondPlayerScore.ToString();
-
-            roamingSettings.Values["grid"] = serializeGrid(grid);
-
-            roamingSettings.Values["firstPlayerTurn"] = firstPlayerTurn.ToString();
-
-            roamingSettings.Values["topPlayers"] = serializePlayers(topPlayers);
-
-            roamingSettings.Values["topPlayerScores"] = serializeScores(topPlayerScores);
-
-            roamingSettings.Values["secondPlayerColor"] = secondPlayerColor.ToString();
-
-            roamingSettings.Values["firstPlayerColor"] = firstPlayerColor.ToString();
-
-        }
-
-        #region NavigationHelper registration
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedTo(e);
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
-
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -277,6 +168,114 @@ namespace ConnectFour
                 interactionTextBlock.Text = secondPlayerName + " Won!";
             }
         }
+
+        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+            // Load session and app state
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+        Windows.Storage.ApplicationData.Current.RoamingSettings;
+            if (roamingSettings.Values.ContainsKey("firstPlayerName"))
+                firstPlayerName = roamingSettings.Values["firstPlayerName"].ToString();
+
+            if (roamingSettings.Values.ContainsKey("secondPlayerName"))
+                secondPlayerName = roamingSettings.Values["secondPlayerName"].ToString();
+
+            if (roamingSettings.Values.ContainsKey("firstPlayerScore"))
+                firstPlayerScore = Convert.ToInt32(roamingSettings.Values["firstPlayerScore"].ToString());
+
+            if (roamingSettings.Values.ContainsKey("secondPlayerScore"))
+                secondPlayerScore = Convert.ToInt32(roamingSettings.Values["secondPlayerScore"].ToString());
+
+            firstPlayerNameTextBlock.Text = firstPlayerName + ":  ";
+            firstPlayerScoreTextBlock.Text = firstPlayerScore.ToString();
+
+            secondPlayerNameTextBlock.Text = secondPlayerName + ":  ";
+            secondPlayerScoreTextBlock.Text = secondPlayerScore.ToString();
+
+            if (roamingSettings.Values.ContainsKey("grid"))
+                grid = deserializeGrid(roamingSettings.Values["grid"].ToString());
+
+            if (roamingSettings.Values.ContainsKey("firstPlayerTurn"))
+                firstPlayerTurn = Convert.ToBoolean(roamingSettings.Values["firstPlayerTurn"].ToString());
+
+            if (roamingSettings.Values.ContainsKey("topPlayers"))
+                topPlayers = deserializePlayers(roamingSettings.Values["topPlayers"].ToString());
+
+            if (roamingSettings.Values.ContainsKey("topPlayerScores"))
+                topPlayerScores = deserializeScores(roamingSettings.Values["topPlayerScores"].ToString());
+
+            populateTopPlayers();
+
+            if (roamingSettings.Values.ContainsKey("firstPlayerColor"))
+                firstPlayerColor = GetColorFromHexString(roamingSettings.Values["firstPlayerColor"].ToString());
+
+            if (roamingSettings.Values.ContainsKey("secondPlayerColor"))
+                secondPlayerColor = GetColorFromHexString(roamingSettings.Values["secondPlayerColor"].ToString());
+
+            if (firstPlayerTurn)
+            {
+                interactionTextBlock.Foreground = new SolidColorBrush(firstPlayerColor);
+                interactionTextBlock.Text = firstPlayerName + "'s Turn!";
+            }
+            else
+            {
+                interactionTextBlock.Foreground = new SolidColorBrush(secondPlayerColor);
+                interactionTextBlock.Text = secondPlayerName + "'s Turn!";
+            }
+            if (playerWon(grid, 1))
+            {
+                interactionTextBlock.Foreground = new SolidColorBrush(firstPlayerColor);
+                interactionTextBlock.Text = firstPlayerName + " Won!";
+            }
+            if (playerWon(grid, 2))
+            {
+                interactionTextBlock.Foreground = new SolidColorBrush(secondPlayerColor);
+                interactionTextBlock.Text = secondPlayerName + " Won!";
+            }
+
+            DrawGrid();
+        }
+
+        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+             // Save session and app state
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+        Windows.Storage.ApplicationData.Current.RoamingSettings;
+            roamingSettings.Values["firstPlayerName"] = firstPlayerName;
+
+            roamingSettings.Values["secondPlayerName"] = secondPlayerName;
+
+            roamingSettings.Values["firstPlayerScore"] = firstPlayerScore.ToString();
+
+            roamingSettings.Values["secondPlayerScore"] = secondPlayerScore.ToString();
+
+            roamingSettings.Values["grid"] = serializeGrid(grid);
+
+            roamingSettings.Values["firstPlayerTurn"] = firstPlayerTurn.ToString();
+
+            roamingSettings.Values["topPlayers"] = serializePlayers(topPlayers);
+
+            roamingSettings.Values["topPlayerScores"] = serializeScores(topPlayerScores);
+
+            roamingSettings.Values["secondPlayerColor"] = secondPlayerColor.ToString();
+
+            roamingSettings.Values["firstPlayerColor"] = firstPlayerColor.ToString();
+
+        }
+
+        #region NavigationHelper registration
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            navigationHelper.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            navigationHelper.OnNavigatedFrom(e);
+        }
+
+        #endregion
 
         private void DrawGrid()
         {
@@ -461,19 +460,6 @@ namespace ConnectFour
         {
             this.Frame.Navigate(typeof(AboutPage), null);
         }
-
-        //private void Grid_KeyUp(object sender, KeyRoutedEventArgs e)
-        //{
-        //    switch (e.Key)
-        //    {
-        //        case VirtualKey.Number1: makePlay(0); break;
-        //        case VirtualKey.Number2: makePlay(1); break;
-        //        case VirtualKey.Number3: makePlay(2); break;
-        //        case VirtualKey.Number4: makePlay(3); break;
-        //        case VirtualKey.Number5: makePlay(4); break;
-        //        case VirtualKey.Number6: makePlay(5); break;
-        //    }
-        //}
 
         private void Page_KeyUp(object sender, KeyRoutedEventArgs e)
         {
