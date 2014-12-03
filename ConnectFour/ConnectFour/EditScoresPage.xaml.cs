@@ -77,10 +77,10 @@ namespace ConnectFour
             topScorerTextBlock5.Text = topPlayers[4] + ":";
             topScoreTextBlock5.Text = "  " + topPlayerScores[4].ToString();
 
-            name1.Text = firstPlayerName + " Wins:  ";
+            name1.Text = firstPlayerName + ":  ";
             score1.Text = firstPlayerScore.ToString();
 
-            name2.Text = secondPlayerName + " Wins:  ";
+            name2.Text = secondPlayerName + ":  ";
             score2.Text = secondPlayerScore.ToString();
         }
 
@@ -97,6 +97,46 @@ namespace ConnectFour
         /// session. The state will be null the first time a page is visited.</param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+Windows.Storage.ApplicationData.Current.RoamingSettings;
+            if (roamingSettings.Values.ContainsKey("firstPlayerName"))
+                firstPlayerName = roamingSettings.Values["firstPlayerName"].ToString();
+
+            if (roamingSettings.Values.ContainsKey("secondPlayerName"))
+                secondPlayerName = roamingSettings.Values["secondPlayerName"].ToString();
+
+            if (roamingSettings.Values.ContainsKey("topPlayers"))
+                topPlayers = deserializePlayers(roamingSettings.Values["topPlayers"].ToString());
+
+            if (roamingSettings.Values.ContainsKey("topPlayerScores"))
+                topPlayerScores = deserializeScores(roamingSettings.Values["topPlayerScores"].ToString());
+
+            if (roamingSettings.Values.ContainsKey("firstPlayerScore"))
+                firstPlayerScore = Convert.ToInt32(roamingSettings.Values["firstPlayerScore"].ToString());
+
+            if (roamingSettings.Values.ContainsKey("secondPlayerScore"))
+                secondPlayerScore = Convert.ToInt32(roamingSettings.Values["secondPlayerScore"].ToString());
+
+            topScorerTextBlock1.Text = topPlayers[0] + ":";
+            topScoreTextBlock1.Text = "  " + topPlayerScores[0].ToString();
+
+            topScorerTextBlock2.Text = topPlayers[1] + ":";
+            topScoreTextBlock2.Text = "  " + topPlayerScores[1].ToString();
+
+            topScorerTextBlock3.Text = topPlayers[2] + ":";
+            topScoreTextBlock3.Text = "  " + topPlayerScores[2].ToString();
+
+            topScorerTextBlock4.Text = topPlayers[3] + ":";
+            topScoreTextBlock4.Text = "  " + topPlayerScores[3].ToString();
+
+            topScorerTextBlock5.Text = topPlayers[4] + ":";
+            topScoreTextBlock5.Text = "  " + topPlayerScores[4].ToString();
+
+            name1.Text = firstPlayerName + ":  ";
+            score1.Text = firstPlayerScore.ToString();
+
+            name2.Text = secondPlayerName + ":  ";
+            score2.Text = secondPlayerScore.ToString();
         }
 
         /// <summary>
@@ -109,6 +149,15 @@ namespace ConnectFour
         /// serializable state.</param>
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+Windows.Storage.ApplicationData.Current.RoamingSettings;
+            roamingSettings.Values["topPlayers"] = serializePlayers(topPlayers);
+
+            roamingSettings.Values["topPlayerScores"] = serializeScores(topPlayerScores);
+
+            roamingSettings.Values["firstPlayerScore"] = firstPlayerScore.ToString();
+
+            roamingSettings.Values["secondPlayerScore"] = secondPlayerScore.ToString();
         }
 
         #region NavigationHelper registration
@@ -134,6 +183,42 @@ namespace ConnectFour
 
         #endregion
 
+        private string serializeScores(int[] scores)
+        {
+            string result = "";
+            for (int c = 0; c < 5; c++)
+            {
+                result += scores[c].ToString() + ",";
+            }
+            return result;
+        }
+
+        private string serializePlayers(string[] players)
+        {
+            string result = "";
+            for (int c = 0; c < 5; c++)
+            {
+                result += players[c] + ",";
+            }
+            return result;
+        }
+
+        private string[] deserializePlayers(string serialization)
+        {
+            return serialization.Split(',');
+        }
+
+        private int[] deserializeScores(string serialization)
+        {
+            int[] result = { 0, 0, 0, 0, 0 };
+            string[] test = serialization.Split(',');
+            for (int i = 0; i < 5; i++)
+            {
+                result[i] = Convert.ToInt32(test[i]);
+            }
+            return result;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             firstPlayerScore = 0;
@@ -145,10 +230,30 @@ namespace ConnectFour
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            topPlayers[0] = "One";
+            topPlayers[1] = "Two";
+            topPlayers[2] = "Three";
+            topPlayers[3] = "Four";
+            topPlayers[4] = "Five";
             for(int i = 0; i < 5; i++)
             {
                 topPlayerScores[i] = 0;
             }
+
+            topScorerTextBlock1.Text = topPlayers[0] + ":";
+            topScoreTextBlock1.Text = "  " + topPlayerScores[0].ToString();
+
+            topScorerTextBlock2.Text = topPlayers[1] + ":";
+            topScoreTextBlock2.Text = "  " + topPlayerScores[1].ToString();
+
+            topScorerTextBlock3.Text = topPlayers[2] + ":";
+            topScoreTextBlock3.Text = "  " + topPlayerScores[2].ToString();
+
+            topScorerTextBlock4.Text = topPlayers[3] + ":";
+            topScoreTextBlock4.Text = "  " + topPlayerScores[3].ToString();
+
+            topScorerTextBlock5.Text = topPlayers[4] + ":";
+            topScoreTextBlock5.Text = "  " + topPlayerScores[4].ToString();
         }
     }
 }

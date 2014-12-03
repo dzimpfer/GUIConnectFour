@@ -80,6 +80,28 @@ namespace ConnectFour
         /// session. The state will be null the first time a page is visited.</param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+        Windows.Storage.ApplicationData.Current.RoamingSettings;
+            if (roamingSettings.Values.ContainsKey("firstPlayerName"))
+                firstPlayerName = roamingSettings.Values["firstPlayerName"].ToString();
+
+            if (roamingSettings.Values.ContainsKey("secondPlayerName"))
+                secondPlayerName = roamingSettings.Values["secondPlayerName"].ToString();
+
+            if (roamingSettings.Values.ContainsKey("firstPlayerColor"))
+                firstPlayerColor = GetColorFromHexString(roamingSettings.Values["firstPlayerColor"].ToString());
+
+            if (roamingSettings.Values.ContainsKey("secondPlayerColor"))
+                secondPlayerColor = GetColorFromHexString(roamingSettings.Values["secondPlayerColor"].ToString());
+
+            textBox1.Text = firstPlayerName;
+            //firstPlayerScoreTextBlock.Text = firstPlayerColor.ToString();
+            ellipse1.Fill = new SolidColorBrush(firstPlayerColor);
+
+            textBox2.Text = secondPlayerName;
+            //secondPlayerScoreTextBlock.Text = secondPlayerColor.ToString();
+            ellipse2.Fill = new SolidColorBrush(secondPlayerColor);
+
         }
 
         /// <summary>
@@ -92,6 +114,22 @@ namespace ConnectFour
         /// serializable state.</param>
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+        Windows.Storage.ApplicationData.Current.RoamingSettings;
+
+            if (firstPlayerName != textBox1.Text.Trim() || secondPlayerName != textBox2.Text.Trim())
+            {
+                roamingSettings.Values["firstPlayerScore"] = 0;
+                roamingSettings.Values["secondPlayerScore"] = 0;
+            }
+
+            roamingSettings.Values["firstPlayerName"] = textBox1.Text.Trim() == "" ? firstPlayerName : textBox1.Text.Trim();
+
+            roamingSettings.Values["secondPlayerName"] = textBox2.Text.Trim() == "" ? secondPlayerName : textBox2.Text.Trim();
+
+            roamingSettings.Values["firstPlayerColor"] = ((SolidColorBrush)ellipse1.Fill).Color.ToString();
+
+            roamingSettings.Values["secondPlayerColor"] = ((SolidColorBrush)ellipse2.Fill).Color.ToString();
         }
 
         #region NavigationHelper registration
@@ -116,6 +154,16 @@ namespace ConnectFour
         }
 
         #endregion
+
+        private Color GetColorFromHexString(string hexValue)
+        {
+            hexValue = hexValue.Substring(1);
+            var a = Convert.ToByte(hexValue.Substring(0, 2), 16);
+            var r = Convert.ToByte(hexValue.Substring(2, 2), 16);
+            var g = Convert.ToByte(hexValue.Substring(4, 2), 16);
+            var b = Convert.ToByte(hexValue.Substring(6, 2), 16);
+            return Color.FromArgb(a, r, g, b);
+        }
 
         private void ellipse1_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
